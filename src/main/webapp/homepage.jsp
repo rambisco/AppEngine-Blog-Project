@@ -21,12 +21,35 @@
 
   <body>
   
+  
+<%     
+	UserService userService = UserServiceFactory.getUserService();
+
+	User user = userService.getCurrentUser();
+
+	if (user != null) {
+
+  		pageContext.setAttribute("user", user);
+	}
+
+%>
+  
   <!-- Header -->
   <ul>
   <li><a class="active" href="#">Home</a></li>
   <li><a href="/post.jsp">Post</a></li>
+  <%
+	if(user != null){  
+  %>
 
-  <li><a href="#about">About</a></li>
+  <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"> Hello ${fn:escapeXml(user.nickname)}! Sign out</a></li>
+  <%
+	} else {
+  %>
+  <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a></li>
+  <%
+	}
+  %>
 </ul>
     <h1>Hat Blog!</h1>
     
