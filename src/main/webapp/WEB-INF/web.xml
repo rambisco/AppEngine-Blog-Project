@@ -4,7 +4,20 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>homepage.jsp</welcome-file>
   </welcome-file-list>
+  
+<servlet>
+  	<servlet-name>submit</servlet-name>
+  	<servlet-class>servlets.SubmitServlet</servlet-class>
+  
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>submit</servlet-name>
+  	<url-pattern>/submit</url-pattern>
+  </servlet-mapping>
+
+  
+  
 </web-app>
