@@ -54,6 +54,8 @@ public class SubmitServlet extends HttpServlet {
     Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
 
     String content = req.getParameter("content");
+    
+    String title = req.getParameter("title");
 
     Date date = new Date();
 
@@ -64,7 +66,10 @@ public class SubmitServlet extends HttpServlet {
     blogPost.setProperty("date", date);
 
     blogPost.setProperty("content", content);
-
+    
+    blogPost.setProperty("title", title);
+    
+    
 
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -73,7 +78,7 @@ public class SubmitServlet extends HttpServlet {
 
 
 
-    resp.sendRedirect("/");
+    resp.sendRedirect("/all.jsp");
 
 }
 

@@ -52,6 +52,8 @@
   %>
 </ul>
     <h1>Hat Blog!</h1>
+    <img src="black-suede-fedora.jpeg" alt="A black suede fedora" style="width:200px;height:200px;">
+    
     
     
 

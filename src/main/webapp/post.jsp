@@ -51,6 +51,17 @@
 	<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
 
 	<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+	
+	<form action="/submit" method="post">
+	  <div><textarea id = "titlebox" placeholder = "Title" name = "title" rows = 1, cols = 20></textarea></div>	
+		
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+
+      <div><input type="submit" value="Post Greeting" /></div>
+
+      <input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
+
+    </form>
 
 <%
 
@@ -62,24 +73,13 @@
 
 	<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
 
-	so everyone knows your dope hat is YOURS! :)</p>
+	to be able to make a post :)</p>
 
 <%
 
 }
 
 %>
-
-
-	<form action="/submit" method="post">
-
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-
-      <div><input type="submit" value="Post Greeting" /></div>
-
-      <input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
-
-    </form>
 
 </body>
 
