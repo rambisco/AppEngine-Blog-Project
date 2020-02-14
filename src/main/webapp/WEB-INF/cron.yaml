@@ -1,0 +1,4 @@
+cron:
+- description: "Subscription"
+url: /email
+schedule: every 2 mins

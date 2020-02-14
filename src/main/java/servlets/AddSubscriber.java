@@ -25,49 +25,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
+//Dylan Driving Cachow
 
+public class AddSubscriber extends HttpServlet {
 
-public class SubmitServlet extends HttpServlet {
-
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
 
             throws IOException {
     	
-    	//David Driving
+    	UserService userService = UserServiceFactory.getUserService();
 
-    UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+    	
+    	if(user == null) {
+    	    	resp.sendError(400, "Not signed in");
+    	    	return;
+    	 
+    	}
+    	
 
-    User user = userService.getCurrentUser();
-
-    String guestbookName = "hats";
-
-    Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
-
-    String content = req.getParameter("content");
-    
-    String title = req.getParameter("title");
-
-    Date date = new Date();
-
-    Entity blogPost = new Entity("BlogPost", guestbookKey);
-
-    blogPost.setProperty("user", user);
-
-    blogPost.setProperty("date", date);
-
-    blogPost.setProperty("content", content);
-    
-    blogPost.setProperty("title", title);
-    
-    	//End of David driving
-    
     
 
+    String subscriberName = user.getEmail();
 
+    Key subscriberKey = KeyFactory.createKey("SubscriberList", subscriberName);
+
+
+    Entity subscriber = new Entity("Subscriber", subscriberKey);
+    
+ 
+
+    subscriber.setProperty("email", user.getEmail());
+    
+    
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    datastore.put(blogPost);
-
+    datastore.put(subscriber);
 
 
     resp.sendRedirect("/");

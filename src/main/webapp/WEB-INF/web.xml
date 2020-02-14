@@ -13,10 +13,42 @@
   
   </servlet>
   
+<servlet>
+	<servlet-name>email</servlet-name>
+	<servlet-class>servlets.EmailServlet</servlet-class>
+</servlet>
+
+<servlet>
+	<servlet-name>addSub</servlet-name>
+	<servlet-class>servlets.AddSubscriber</servlet-class>
+</servlet>
+
+<servlet>
+	<servlet-name>remSub</servlet-name>
+	<servlet-class>servlets.RemoveSubscriberServlet</servlet-class>
+</servlet>
+  
   <servlet-mapping>
   	<servlet-name>submit</servlet-name>
   	<url-pattern>/submit</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>email</servlet-name>
+  	<url-pattern>/email</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>remSub</servlet-name>
+  	<url-pattern>/rem</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet-mapping>
+  	<servlet-name>addSub</servlet-name>
+  	<url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  
 
   
   

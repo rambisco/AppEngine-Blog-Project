@@ -49,7 +49,19 @@
 
     Query query = new Query("BlogPost", guestbookKey).addSort("user", Query.SortDirection.DESCENDING).addSort("date", Query.SortDirection.DESCENDING);
 
-    List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+    List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
+    
+    Query subQuery = new Query("Subscriber").addSort("email", Query.SortDirection.DESCENDING);
+
+    List<Entity> subscribers = datastore.prepare(subQuery).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
+    
+    
+    if(subscribers.isEmpty()){
+    	%>
+    	<p> No subscribers.<p>
+    	
+    	<%
+    }
     
     if (greetings.isEmpty()) {
 
@@ -66,18 +78,32 @@
         <p>Posts in Hat Blog.</p>
 
         <%
+        
+        for(Entity subscriber: subscribers) {
+        	pageContext.setAttribute("sub_email",
+
+                    subscriber.getProperty("email"));
+        	
+        	%>
+        	<h6>Subscriber: ${fn:escapeXml(sub_email)}</h6>
+        	<%
+        }
+        
 
         for (Entity greeting : greetings) {
 
             pageContext.setAttribute("greeting_content",
 
                                      greeting.getProperty("content"));
+            pageContext.setAttribute("greeting_date",
+					 greeting.getProperty("date"));
             
             pageContext.setAttribute("greeting_title",
             							greeting.getProperty("title")); 
 
 
             %>
+            <h5>${fn:escapeXml(greeting_date)}</h5>
             <h4>${fn:escapeXml(greeting_title)}</h4>
 
             <blockquote>${fn:escapeXml(greeting_content)}</blockquote>
