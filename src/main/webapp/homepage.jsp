@@ -27,7 +27,7 @@
 
 <html>
   <head>
-    <link rel="stylesheet" href="home.css">
+    <link id = "myStyleSheet" rel="stylesheet" href="home.css">
     <title>Hello App Engine</title>
     
  
@@ -35,9 +35,50 @@
 
   <body>
   
+  <div id = "test">Hello</div>
+  
+  <script>
+  if(localStorage.getItem("nightMode") == null){
+	  localStorage.setItem("nightMode", "true");
+	  document.getElementById("test").innerHTML = "working";
+	  
+  }
+     var nightMode = localStorage.getItem("nightMode");
+     
+     if(nightMode.localeCompare("true") == 0){
+    	 document.getElementById('myStyleSheet').href = "home.css";
+     }else{
+    	 document.getElementById('myStyleSheet').href = "darkmode.css";
+     }
+     
+     console.log(nightMode);
+	  
+	  
+	  
+  
+  
+  </script>
+  
+  <script>
+function
+switchMode(){
+	var nightMode = localStorage.getItem("nightMode");
+    if(nightMode.localeCompare("true") == 0){
+    	localStorage.setItem("nightMode", "false");
+    }else{
+    	localStorage.setItem("nightMode", "true");
+    }
+	window.location.reload(false); 
+
+}
+</script>
+  
   
 <%
  //Dylan Driving
+ 
+ 	
+ 	
 	
 	Boolean isSubscribed = false;
 	UserService userService = UserServiceFactory.getUserService();
@@ -65,6 +106,8 @@
   		 
 	}
 	//End of Dylan Driving
+	
+	
 
 %>
   
@@ -74,6 +117,7 @@
   <li><a class="active" href="#">Home</a></li>
   <li><a href="/post.jsp">Make A Post</a></li>
   <li><a href="/all.jsp">All Posts</a></li>
+  <li><a href="javascript:switchMode();">Toggle Light/Dark Mode</a></li>
   
   <%
 	if(user != null){  
@@ -97,7 +141,7 @@
 	}
   %>
 </ul>
-    <h1 align="center" >Hat Blog!</h1>
+    <h1 id = "main" align="center" >Hat Blog!</h1>
     <img class = "center" src="black-suede-fedora.jpeg" alt="A black suede fedora" style="width:200px;height:200px;">
     
     <!-- End of Dylan Driving -->
@@ -187,5 +231,6 @@
     }
 
 %>
+
   </body>
 </html>
