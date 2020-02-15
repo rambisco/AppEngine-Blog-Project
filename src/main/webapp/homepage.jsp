@@ -37,7 +37,7 @@
   
   
 <%
-
+ //Dylan Driving
 	
 	Boolean isSubscribed = false;
 	UserService userService = UserServiceFactory.getUserService();
@@ -51,19 +51,25 @@
   		Query subQuery = new Query("Subscriber").addSort("email", Query.SortDirection.DESCENDING);
   		List<Entity> subscribers = datastore.prepare(subQuery).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
   		
+  		 if(!subscribers.isEmpty()){
+  	    	
+  	    
   		
   		for(Entity subscriber : subscribers){
   			if(subscriber.getProperty("email").equals(user.getEmail())){
   				isSubscribed = true;
   			}
   			
-  		}
+  			}
+  		 }
+  		 
 	}
+	//End of Dylan Driving
 
 %>
   
   <!-- NavBar -->
-  <!-- Dylan driving -->
+  <!-- Dylan driving this whole navbar-->
   <ul>
   <li><a class="active" href="#">Home</a></li>
   <li><a href="/post.jsp">Make A Post</a></li>
@@ -108,7 +114,7 @@
 
     // view of the Greetings belonging to the selected Guestbook.
 
-    Query query = new Query("BlogPost", guestbookKey).addSort("user", Query.SortDirection.DESCENDING).addSort("date", Query.SortDirection.DESCENDING);
+    Query query = new Query("BlogPost", guestbookKey);//.addSort("date", Query.SortDirection.DESCENDING);
 
     List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
     
