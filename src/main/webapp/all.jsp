@@ -126,7 +126,9 @@
 
                 %>
 
-                <p>- <b>${fn:escapeXml(greeting_user.nickname)}</b></p>
+                <p align = right >- <b>${fn:escapeXml(greeting_user.nickname)}</b></p>
+                <br>
+                <hr>
 
                 <%
 

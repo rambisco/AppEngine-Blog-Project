@@ -54,10 +54,10 @@
 	<form action="/submit" method="post">
 	<!-- Dylan Driving -->
 	  <div><textarea id = "titlebox" placeholder = "Title" name = "title" rows = 1, cols = 20></textarea></div>	
-		
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-
-      <div><input type="submit" value="Submit" /></div>
+		<br>
+      <div><textarea name="content" placeholder = "Content" rows="6" cols="120"></textarea></div>
+		<br>
+      <div><input id= "button" type="submit" value="Submit" /></div>
 
       <input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
 

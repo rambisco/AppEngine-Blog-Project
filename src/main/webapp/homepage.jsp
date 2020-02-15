@@ -91,8 +91,8 @@
 	}
   %>
 </ul>
-    <h1>Hat Blog!</h1>
-    <img src="black-suede-fedora.jpeg" alt="A black suede fedora" style="width:200px;height:200px;">
+    <h1 align="center" >Hat Blog!</h1>
+    <img class = "center" src="black-suede-fedora.jpeg" alt="A black suede fedora" style="width:200px;height:200px;">
     
     <!-- End of Dylan Driving -->
     
@@ -167,8 +167,9 @@
 
                 %>
 
-                <p>- <b>${fn:escapeXml(greeting_user.nickname)}</b></p>
-
+                <p align = right>- <b>${fn:escapeXml(greeting_user.nickname)}</b></p>
+                <br>
+                <hr>
                 <%
                 
                 //End of David Driving
