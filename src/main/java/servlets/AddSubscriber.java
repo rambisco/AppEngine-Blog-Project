@@ -38,12 +38,12 @@ public class AddSubscriber extends HttpServlet {
         User user = userService.getCurrentUser();
     	
     	if(user == null) {	
-    		String subscriberName = "cron";
-    	    Key subscriberKey = KeyFactory.createKey("SubscriberList", subscriberName);
-    	    Entity subscriber = new Entity("Subscriber", subscriberKey);
-    	    subscriber.setProperty("email", "cron"); 
-    	    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    	    datastore.put(subscriber);
+//    		String subscriberName = "cron";
+//    	    Key subscriberKey = KeyFactory.createKey("SubscriberList", subscriberName);
+//    	    Entity subscriber = new Entity("Subscriber", subscriberKey);
+//    	    subscriber.setProperty("email", "cron"); 
+//    	    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+//    	    datastore.put(subscriber);
     	    	return;
     	 
     	}

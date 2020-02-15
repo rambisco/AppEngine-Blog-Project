@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 
 <%@ page import="com.google.appengine.api.users.User" %>
 
@@ -35,12 +35,9 @@
 
   <body>
   
-  <div id = "test">Hello</div>
-  
   <script>
   if(localStorage.getItem("nightMode") == null){
 	  localStorage.setItem("nightMode", "true");
-	  document.getElementById("test").innerHTML = "working";
 	  
   }
      var nightMode = localStorage.getItem("nightMode");
@@ -114,7 +111,7 @@ switchMode(){
   <!-- NavBar -->
   <!-- Dylan driving this whole navbar-->
   <ul>
-  <li><a class="active" href="#">Home</a></li>
+  <li><a class="active" href="/">Home</a></li>
   <li><a href="/post.jsp">Make A Post</a></li>
   <li><a href="/all.jsp">All Posts</a></li>
   <li><a href="javascript:switchMode();">Toggle Light/Dark Mode</a></li>
@@ -160,7 +157,16 @@ switchMode(){
 
     Query query = new Query("BlogPost", guestbookKey);//.addSort("date", Query.SortDirection.DESCENDING);
 
-    List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+    List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
+    
+    Collections.sort(greetings, new Comparator<Entity>() {
+        @Override
+        public int compare(Entity o1, Entity o2) {
+        	return (((Date)(o1.getProperty("date"))).compareTo((Date)(o2.getProperty("date"))))*-1;
+        }
+    });
+    
+    
     
     if (greetings.isEmpty()) {
 
@@ -177,8 +183,14 @@ switchMode(){
         <p>Posts in Hat Blog.</p>
 
         <%
+        
+        int i = 0;
 
         for (Entity greeting : greetings) {
+        	i++;
+        	if(i==6){
+        		break;
+        	}
         	
         	//David Driving
 

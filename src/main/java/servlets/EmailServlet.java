@@ -62,9 +62,22 @@ public class EmailServlet extends HttpServlet {
 
 	      List<Entity> subscribers = datastore.prepare(subQuery).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
 	      
+	      Collections.sort(posts, new Comparator<Entity>() {
+	          @Override
+	          public int compare(Entity o1, Entity o2) {
+	          	return (((Date)(o1.getProperty("date"))).compareTo((Date)(o2.getProperty("date"))))*-1;
+	          }
+	      });
+	      
 	      StringBuilder builder = new StringBuilder();
 	      
+	      Date now = new Date();
+	      Date aDayAgo = new Date(now.getTime() - 86400000);
+	    		  // Date(int year, int month, int date, int hrs, int min)
+	      
 	      for(Entity post : posts) {
+	    	  Date postDate = (Date)post.getProperty("date");
+	    	  if(postDate.before(aDayAgo)) continue;
 	    	  builder.append("\n \n User: ");
 	    	  builder.append(((User) post.getProperty("user")).getNickname());
 	    	  builder.append("\n Title: ");
@@ -80,6 +93,8 @@ public class EmailServlet extends HttpServlet {
 		   	    	 MimeMessage message = new MimeMessage(session);
 		   	    	 message.setFrom(new InternetAddress(from));
 		        	 to = (String)subscriber.getProperty("email");
+		        	 if(to.equals("cron")) continue;
+		        	 if(((User) subscriber.getProperty("user")).getNickname().contentEquals("cron")) continue;
 		        	// Set To: header field of the header.
 			         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	

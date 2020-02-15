@@ -28,7 +28,7 @@
 <html>
 <head>
 <!-- navbar will go here -->
-<link rel="stylesheet" href="home.css">
+<link id = "myStyleSheet" rel="stylesheet" href="home.css">
 </head>
 
 <body>
@@ -103,7 +103,7 @@
 %>
 
 <ul>
-	<li><a class="active" href="#">Home</a></li>
+	<li><a class="active" href="/">Home</a></li>
 	<li><a href="/post.jsp">Make A Post</a></li>
 	<li><a href="/all.jsp">All Posts</a></li>
 	<li><a href="javascript:switchMode();">Toggle Light/Dark Mode</a></li>
@@ -138,9 +138,6 @@
 <h2>Show off your favorite hats! :)</h2>
 
 <%     
-	UserService userService = UserServiceFactory.getUserService();
-
-	User user = userService.getCurrentUser();
 
 	if (user != null) {
 

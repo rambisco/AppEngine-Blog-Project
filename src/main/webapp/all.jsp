@@ -28,7 +28,7 @@
 <html>
 
   <head>
-   <link type="text/css" rel="stylesheet" href="home.css" />
+   <link id = "myStyleSheet" type="text/css" rel="stylesheet" href="home.css" />
   </head>
 
  
@@ -37,8 +37,6 @@
     <script>
         if(localStorage.getItem("nightMode") == null){
             localStorage.setItem("nightMode", "true");
-            document.getElementById("test").innerHTML = "working";
-            
         }
            var nightMode = localStorage.getItem("nightMode");
            
@@ -106,7 +104,7 @@
         <!-- NavBar -->
         <!-- Dylan driving this whole navbar-->
         <ul>
-        <li><a class="active" href="#">Home</a></li>
+        <li><a class="active" href="/">Home</a></li>
         <li><a href="/post.jsp">Make A Post</a></li>
         <li><a href="/all.jsp">All Posts</a></li>
         <li><a href="javascript:switchMode();">Toggle Light/Dark Mode</a></li>
@@ -177,16 +175,6 @@
         <p>Posts in Hat Blog.</p>
 
         <%
-        
-        for(Entity subscriber: subscribers) {
-        	pageContext.setAttribute("sub_email",
-
-                    subscriber.getProperty("email"));
-        	
-        	%>
-        	<h6>Subscriber: ${fn:escapeXml(sub_email)}</h6>
-        	<%
-        }
         
 
         for (Entity greeting : greetings) {

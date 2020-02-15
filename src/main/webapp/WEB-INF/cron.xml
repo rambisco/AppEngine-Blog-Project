@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
 <cron>
-<url>/add</url>
-<description>Add Subscriber</description>
-<schedule>every 2 minutes</schedule>
+<url>/email</url>
+<description>Email Subscribers</description>
+<schedule>every day 00:30</schedule>
 </cron>
 </cronentries>
