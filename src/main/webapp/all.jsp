@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 
 <%@ page import="com.google.appengine.api.users.User" %>
 
@@ -151,6 +151,13 @@
     Query subQuery = new Query("Subscriber").addSort("email", Query.SortDirection.DESCENDING);
 
     List<Entity> subscribers = datastore.prepare(subQuery).asList(FetchOptions.Builder.withLimit(Integer.MAX_VALUE));
+    
+    Collections.sort(greetings, new Comparator<Entity>() {
+        @Override
+        public int compare(Entity o1, Entity o2) {
+        	return (((Date)(o1.getProperty("date"))).compareTo((Date)(o2.getProperty("date"))))*-1;
+        }
+    });
     
     
     if(subscribers.isEmpty()){

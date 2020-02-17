@@ -75,9 +75,12 @@ public class EmailServlet extends HttpServlet {
 	      Date aDayAgo = new Date(now.getTime() - 86400000);
 	    		  // Date(int year, int month, int date, int hrs, int min)
 	      
+	      int count = 0;
+	      
 	      for(Entity post : posts) {
 	    	  Date postDate = (Date)post.getProperty("date");
 	    	  if(postDate.before(aDayAgo)) continue;
+	    	  count++;
 	    	  builder.append("\n \n User: ");
 	    	  builder.append(((User) post.getProperty("user")).getNickname());
 	    	  builder.append("\n Title: ");
@@ -87,19 +90,22 @@ public class EmailServlet extends HttpServlet {
 	    	  String content = (String) post.getProperty("content");
 	    	  builder.append(content);
 	      }
-	         
+	         if(count == 0) {
+	    	     resp.sendRedirect("/");
+	    	     return;
+	         }
 	         for(Entity subscriber : subscribers) {
 		   	      try {
 		   	    	 MimeMessage message = new MimeMessage(session);
 		   	    	 message.setFrom(new InternetAddress(from));
 		        	 to = (String)subscriber.getProperty("email");
+		        	 
 		        	 if(to.equals("cron")) continue;
-		        	 if(((User) subscriber.getProperty("user")).getNickname().contentEquals("cron")) continue;
 		        	// Set To: header field of the header.
 			         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	
 			         // Set Subject: header field
-			         message.setSubject("This is the Subject Line!");
+			         message.setSubject("New posts in Hat Blog in the last 24 Hours!");
 	
 			         // Now set the actual message
 			         message.setText(builder.toString());

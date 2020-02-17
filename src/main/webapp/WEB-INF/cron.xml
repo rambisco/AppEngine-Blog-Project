@@ -3,6 +3,6 @@
 <cron>
 <url>/email</url>
 <description>Email Subscribers</description>
-<schedule>every day 00:30</schedule>
+<schedule>every day 17:00</schedule>
 </cron>
 </cronentries>
